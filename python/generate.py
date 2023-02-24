@@ -5,12 +5,17 @@ from typing import (
 from PIL import (
     Image,
 )
-
+from argparse import (
+	ArgumentParser
+)
 
 ASCII_CHARACTERS: Final[str] = " .:-=+*#%@"
 
-image_filepath = "test-image.png"
-text_file_name = "output.txt"
+parser = ArgumentParser(description="A Python program that converts images into ASCII art")
+parser.add_argument('image_filepath')
+parser.add_argument('text_file_name')
+
+args = parser.parse_args()
 
 def choose_character(pixel_brightness: int) -> str:
     return ASCII_CHARACTERS[
@@ -40,7 +45,7 @@ def write_to_file(output_filepath: str, image_as_ascii_text: str) -> None:
     with open(output_filepath, "w+") as text_file:
         text_file.write(image_as_ascii_text)
 
-grey_scale_image = turn_image_into_greyscale(image_filepath)
+grey_scale_image = turn_image_into_greyscale(args.image_filepath)
 list_of_pixels = get_list_of_pixels(grey_scale_image)
 image_as_ascii_text = convert_list_of_greyscale_pixels_to_text(list_of_pixels)
-write_to_file(text_file_name, image_as_ascii_text)
+write_to_file(args.text_file_name, image_as_ascii_text)
