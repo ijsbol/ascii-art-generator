@@ -1,0 +1,30 @@
+{
+  "name": "ascii-art-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "out/index.js",
+  "scripts": {
+	"start": "node out/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Scrumpyy/ascii-art-generator.git"
+  },
+  "author": "Scrumpyy",
+  "contributors": [
+    "Oakchris1955"
+  ],
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Scrumpyy/ascii-art-generator/issues"
+  },
+  "homepage": "https://github.com/Scrumpyy/ascii-art-generator#readme",
+  "devDependencies": {
+    "@types/argparse": "^2.0.10",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "argparse": "^2.0.1",
+    "jimp": "^0.22.7"
+  }
+}
