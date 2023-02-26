@@ -1,7 +1,22 @@
+import { ArgumentParser } from "argparse";
 import fs from "fs";
 import Jimp from "jimp";
 
+interface Arguments {
+	image_filepath: string,
+	text_file_name: string 
+}
+
 const ASCII_CHARACTERS = " .:-=+*#%@";
+
+const parser = new ArgumentParser({
+	description: "A Javascript program written in Typescript that converts images into ASCII art"
+});
+
+parser.add_argument('image_filepath');
+parser.add_argument('text_file_name');
+
+const args: Arguments = parser.parse_args();
 
 function choose_character(pixel_brightness: number): string {
 	return ASCII_CHARACTERS.charAt(
@@ -47,9 +62,9 @@ function write_to_file(output_filepath: string, image_as_ascii_text: string) {
 	fs.writeFile(output_filepath, image_as_ascii_text, (err) => {if (err) throw err;});
 }
 
-Jimp.read("../test-image.png")
+Jimp.read(args.image_filepath)
 .then((image) => {
 	const list_of_pixels = get_list_of_pixels(image);
 	const image_as_ascii_text = convert_list_of_greyscale_pixels_to_text(list_of_pixels);
-	write_to_file("../output.txt", image_as_ascii_text);
+	write_to_file(args.text_file_name, image_as_ascii_text);
 })
